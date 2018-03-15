@@ -55,7 +55,7 @@ linkFormatter(springLinks)
 linkFormatter(summerLinks)
 linkFormatter(fallLinks)
 
-userAns = int(input("What semester would you like to view classes for?\n1.Spring\n2.Summer\n3.Fall\n\nEnter an interger(1-3):"))
+userAns = int(input("What semester would you like to view classes for?\n1.Spring\n2.Summer\n3.Fall\n\nEnter an integer(1-3):"))
 
 
 if userAns == 1:
