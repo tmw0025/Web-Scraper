@@ -26,7 +26,7 @@ def infoGrabber( linkList ):
     #Append a space to the end of the chosen college abbreviation. 
     #This should help with the MA vs MAE? Maybe?
     #Feel free to delete this line:
-    
+     
     #college = college + " " 
 
 
