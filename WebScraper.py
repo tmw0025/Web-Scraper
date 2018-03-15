@@ -55,7 +55,17 @@ linkFormatter(springLinks)
 linkFormatter(summerLinks)
 linkFormatter(fallLinks)
 
-userAns = int(input("What semester would you like to view classes for?\n1.Spring\n2.Summer\n3.Fall\n\nEnter an integer(1-3):"))
+
+print("What semester would you like to view classes for?")
+
+
+semesterList = ["Spring", "Summer", "Fall"]
+
+idx = 1
+for semester in semesterList:
+    print ('{}.\t{}'.format(idx,semester))
+    idx = idx + 1
+userAns = int(input(">>> "))
 
 
 if userAns == 1:
