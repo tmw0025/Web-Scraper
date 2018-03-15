@@ -23,6 +23,13 @@ def linkFormatter( linkList ):
 
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA for math):"))
+    #Append a space to the end of the chosen college abbreviation. 
+    #This should help with the MA vs MAE? Maybe?
+    #Feel free to delete this line:
+    
+    #college = college + " " 
+
+
     for links in linkList:
         if links.find(college) != -1:
             print(links)
