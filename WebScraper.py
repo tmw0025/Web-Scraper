@@ -1,5 +1,9 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import sys #for exiting
+import os
+
+
 
 def linkGrabber( pageUrl , linkList ): #Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
@@ -33,35 +37,51 @@ def infoGrabber( linkList ):
 
 
 def MenuPrint():
-    print("What semester would you like to view classes for?")
+    print("What semester would you like to view classes for? Hit q to exit")
     semesterList = ["Spring", "Summer", "Fall"]
 
     idx = 1
     for semester in semesterList:
-        print ('{}.\t{}'.format(idx,semester))
+        print ('{}. {}'.format(idx,semester))
         idx = idx + 1
 
+#function to obtain semester choice
+#Includes error handling on user input
 def getSemester():
-    userAns = input(">>> ")
+
     validChoiceChosen = 0
     while validChoiceChosen==0:
+        MenuPrint()
+        userAns = input(">>> ")
+
+        if userAns == 'q':
+            print("\nGoodbye!\n")
+            sys.exit()
         try:
             userAns = int(userAns)
         except ValueError:
-            print("Not a Number")
-            MenuPrint()
-            userAns = input(">>> ")
+            print("Not a Number, please enter a valid integer.\n")
+            continue
         validChoice = [1,2,3]
         if userAns in validChoice:
             validChoiceChosen = 1
             break
-        else:
-            print("Invalid Number.")
-            MenuPrint()
-            userAns = input(">>> ")
+        if userAns not in validChoice:
+            print("Invalid Number, please enter a valid integer. \n")
+            continue
     return userAns
 
+def PrintHeader():
+
+    #Clear terminal and print header
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Welcome to the cgi-bin scraper. \n\n\n")
+
+
 def main():
+
+    PrintHeader()
+
     pageQuote = "https://www.uah.edu/cgi-bin/schedule.pl?"
 
     mainLinks = []
@@ -88,23 +108,20 @@ def main():
 
 
 
-    #print out the menu
-    MenuPrint()
 
 
     #Cue for input from user
     userAns = getSemester()
 
 
-    #TODO error checking on input
     if userAns == 1:
         infoGrabber(springLinks)
     elif userAns == 2:
         infoGrabber(summerLinks)
     elif userAns == 3:
         infoGrabber(fallLinks)
-    # else:
-    #     print("Invalid input. Ending program.\n")
+    else:
+        print("You shouldn't see this")
         
 
 
