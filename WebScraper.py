@@ -25,8 +25,10 @@ def infoGrabber( linkList ):
             page = urlopen(links)
             soup = BeautifulSoup(page, 'html.parser')
             for info in soup.find_all('a'):
-                if info.pre.text is not None:
-                    print(info.pre.text)
+                if info.pre is not None:
+                    for text in info.pre.contents:
+                        if text.find('Sec') != -1:
+                            print(text)
                 
         
     return;
