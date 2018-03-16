@@ -9,6 +9,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import sys #for exiting
 import os
+from Course import Course
 
 # BeautifulSoup Tutorial
 # https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
@@ -114,38 +115,48 @@ def main():
 
     PrintHeader()
 
-    pageQuote = "https://www.uah.edu/cgi-bin/schedule.pl?"
+    exitFlag = False
+    while exitFlag == False:
+        pageQuote = "https://www.uah.edu/cgi-bin/schedule.pl?"
 
-    mainLinks   = []    # Links on the main page.
-    springLinks = []    # Links on the spring semester page
-    summerLinks = []    # Links on the summer semester page
-    fallLinks   = []    # Links on the fall semester page
+        mainLinks   = []    # Links on the main page.
+        springLinks = []    # Links on the spring semester page
+        summerLinks = []    # Links on the summer semester page
+        fallLinks   = []    # Links on the fall semester page
 
-    # Grab the links on the main page
-    linkGrabber( pageQuote , mainLinks)
+        # Grab the links on the main page
+        linkGrabber( pageQuote , mainLinks)
 
-    # Go through each possible link and try to find each semester within each.
-    for links in mainLinks:
+        # Go through each possible link and try to find each semester within each.
+        for links in mainLinks:
 
-        if links.find('sprg') != -1: # we could do >= 0
-            linkGrabber(links, springLinks)
+            if links.find('sprg') != -1: # we could do >= 0
+                linkGrabber(links, springLinks)
 
-        if links.find("sum") != -1:
-            linkGrabber(links, summerLinks)
+            if links.find("sum") != -1:
+                linkGrabber(links, summerLinks)
 
-        if links.find("fall") != -1:
-            linkGrabber(links, fallLinks)
+            if links.find("fall") != -1:
+                linkGrabber(links, fallLinks)
 
-    linkFormatter(springLinks)
-    linkFormatter(summerLinks)
-    linkFormatter(fallLinks)
+        linkFormatter(springLinks)
+        linkFormatter(summerLinks)
+        linkFormatter(fallLinks)
 
-    # Cue for input from user
-    userAns = getSemester()
+        # Cue for input from user
+        userAns = getSemester()
 
-    # Cleaner way of infoGrabber
-    semesterLinkLists = [springLinks, summerLinks, fallLinks]
-    infoGrabber(semesterLinkLists[userAns - 1])
+        # Cleaner way of infoGrabber
+        semesterLinkLists = [springLinks, summerLinks, fallLinks]
+        infoGrabber(semesterLinkLists[userAns - 1])
+
+
+
+
+
+        #Ask user if they want to try again
+        if input("Press q to exit, press any other key to search again.").lower() == "q":
+            exitFlag = True
 
 ####################
 #       Main       #
