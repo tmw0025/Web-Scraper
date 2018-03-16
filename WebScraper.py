@@ -26,11 +26,37 @@ from Course import Course
 def parseInformation():
     return
 
+
+# This parses an individual course line and returns the line if it is a course
+# otherwise it prints an empty line
+def parseCourseLine(line):
+
+    lenOfActualLine = 161 # TODO: Don't let this be hardcoded.
+    crnText = line[5:10] # The CRN should be within this position
+    try:
+        crn = int(crnText)  # Try to convert the text to a number, which would happen
+                            # if the line contained an actual course
+        return line # If it did, return the line
+    except ValueError: # If the line doesn't have a CRN
+        return "" # return basically nothing
+
+
+def getAllCourses(textList):
+    out = []
+    # For each line in the course listing table
+    for line in textList:
+        courseLine = parseCourseLine(line)
+        if len(courseLine) > 0: # If the course actually has something
+            out.append(courseLine) # Add the course to our output.
+    return out
+
+
 def linkGrabber( pageUrl , linkList ): # Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
     # TODO: Is there a way that we can have a single BeautifulSoup object?
     soup = BeautifulSoup(page, 'html.parser')
 
+    # For every link in the page
     for links in soup.find_all('a'):
         if links.get('href') is not None:
             linkList.append(links.get('href'))
@@ -49,6 +75,7 @@ def linkFormatter( linkList ):
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
 
+    textList = []
     # Go through each possible department in classes for the semester.
     for links in linkList:
         # If we found the college the user wants
@@ -65,7 +92,9 @@ def infoGrabber( linkList ):
                     continue
                 elif info.pre.text is not None: # If the link does have the classes
                     print(info.pre.text) # Print all the info
-
+                    for line in info.pre.text.split('\n'):
+                        textList.append(line)
+    return textList
 
 # Prints the possible semesters that the college offers
 # TODO: Maybe make it so that if there is only one semester available for viewing, it prints that one.
@@ -148,8 +177,10 @@ def main():
 
         # Cleaner way of infoGrabber
         semesterLinkLists = [springLinks, summerLinks, fallLinks]
-        infoGrabber(semesterLinkLists[userAns - 1])
-
+        courseListings = infoGrabber(semesterLinkLists[userAns - 1])
+        courses = getAllCourses(courseListings)
+        for course in courses:
+            print(course)
 
 
 
