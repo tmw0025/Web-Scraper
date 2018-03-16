@@ -41,6 +41,8 @@ def linkFormatter( linkList ):
     
     return;
 
+# Grabs all the information from the link
+# Specifically all the classes and their information
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
 
@@ -53,7 +55,7 @@ def infoGrabber( linkList ):
                 if info is None or info.pre is None:
                     print("ERROR: Can't grab information.")
                     # TODO: Fill this out.
-                if info.pre.text is not None:
+                elif info.pre.text is not None:
                     print(info.pre.text)
 
 
