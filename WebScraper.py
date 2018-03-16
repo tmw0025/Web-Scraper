@@ -56,8 +56,8 @@ def MenuPrint():
 #Includes error handling on user input
 def getSemester():
 
-    validChoiceChosen = 0
-    while validChoiceChosen==0:
+    validChoiceChosen = False
+    while validChoiceChosen==False:
         MenuPrint()
         userAns = input(">>> ")
 
@@ -71,7 +71,7 @@ def getSemester():
             continue
         validChoice = [1,2,3]
         if userAns in validChoice:
-            validChoiceChosen = 1
+            validChoiceChosen = True
             break
         if userAns not in validChoice:
             print("Invalid Number, please enter a valid integer. \n")
