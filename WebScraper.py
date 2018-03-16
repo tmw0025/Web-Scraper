@@ -42,10 +42,7 @@ def linkFormatter( linkList ):
     return;
 
 def infoGrabber( linkList ):
-    college = str(input("Enter 2-3 letter college code for class(i.e. MA for math):"))
-    # Append a space to the end of the chosen college abbreviation.
-    # This should help with the MA vs MAE? Maybe?
-    # Feel free to delete this line:
+    college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
 
     for links in linkList:
         if links.find(college) != -1:
