@@ -19,6 +19,11 @@ import os
 # Function Definitions #
 ########################
 
+# This function will take the class list from the department and semester
+# and then gives a class representation of the information. See class for it.
+# TODO: Flesh this out as well.
+def parseInformation():
+    return
 
 def linkGrabber( pageUrl , linkList ): # Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
