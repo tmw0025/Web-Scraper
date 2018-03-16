@@ -4,5 +4,5 @@ This project is to get information from the UAH cgi-bin that lists all of the cl
 
 To-do List:
 * Parse information from Requests and store it into Course class
-* Save Course Class into database
-* Provide access to database through API
+* Save Course Class into a database entry
+* Provide access to database through an API - written in Python
