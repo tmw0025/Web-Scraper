@@ -21,7 +21,7 @@ import os
 
 # This function will take the class list from the department and semester
 # and then gives a class representation of the information. See class for it.
-# TODO: Flesh this out as well.
+# TODO: Flesh this out so that it gets the right information per class and returns a Course object.
 def parseInformation():
     return
 
@@ -30,6 +30,7 @@ def linkGrabber( pageUrl , linkList ): # Function that grabs links from specifie
     # TODO: Is there a way that we can have a single BeautifulSoup object?
     soup = BeautifulSoup(page, 'html.parser')
 
+    # For all links in the page
     for links in soup.find_all('a'):
         if links.get('href') is not None:
             linkList.append(links.get('href'))
