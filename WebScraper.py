@@ -1,4 +1,5 @@
-#WebScraper by the UAH CS Club
+
+# WebScraper by the UAH CS Club
 
 
 ####################
@@ -9,8 +10,7 @@ from bs4 import BeautifulSoup
 import sys #for exiting
 import os
 
-
-#BeautifulSoup Tutorial
+# BeautifulSoup Tutorial
 # https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
 
 
@@ -20,7 +20,7 @@ import os
 ########################
 
 
-def linkGrabber( pageUrl , linkList ): #Function that grabs links from specified url and puts them into a list
+def linkGrabber( pageUrl , linkList ): # Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
     soup = BeautifulSoup(page, 'html.parser')
 
@@ -38,11 +38,11 @@ def linkFormatter( linkList ):
 
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA for math):"))
-    #Append a space to the end of the chosen college abbreviation. 
-    #This should help with the MA vs MAE? Maybe?
-    #Feel free to delete this line:
+    # Append a space to the end of the chosen college abbreviation.
+    # This should help with the MA vs MAE? Maybe?
+    # Feel free to delete this line:
      
-    #college = college + " " 
+    # college = college + " "
 
 
     for links in linkList:
@@ -67,8 +67,8 @@ def MenuPrint():
         print ('{}. {}'.format(idx,semester))
         idx = idx + 1
 
-#function to obtain semester choice
-#Includes error handling on user input
+# function to obtain semester choice
+# Includes error handling on user input
 def getSemester():
 
     validChoiceChosen = False
@@ -95,7 +95,7 @@ def getSemester():
 
 def PrintHeader():
 
-    #Clear terminal and print header
+    # Clear terminal and print header
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Welcome to the cgi-bin scraper. \n\n\n")
 
@@ -132,7 +132,7 @@ def main():
 
 
 
-    #Cue for input from user
+    # Cue for input from user
     userAns = getSemester()
 
     #Cleaner way of infoGrabber
