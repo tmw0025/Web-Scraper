@@ -1,8 +1,23 @@
+#WebScraper by the UAH CS Club
+
+
+####################
+#     Imports      #
+####################
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import sys #for exiting
 import os
 
+
+#BeautifulSoup Tutorial
+# https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
+
+
+
+########################
+# Function Definitions #
+########################
 
 
 def linkGrabber( pageUrl , linkList ): #Function that grabs links from specified url and puts them into a list
@@ -120,17 +135,24 @@ def main():
     #Cue for input from user
     userAns = getSemester()
 
+    #Cleaner way of infoGrabber
+    semesterlinklist = [springLinks,summerLinks,fallLinks]
+    infoGrabber(semesterlinklist[userAns-1])
 
-    if userAns == 1:
-        infoGrabber(springLinks)
-    elif userAns == 2:
-        infoGrabber(summerLinks)
-    elif userAns == 3:
-        infoGrabber(fallLinks)
-    else:
-        print("You shouldn't see this")
+    # if userAns == 1:
+    #     infoGrabber(springLinks)
+    # elif userAns == 2:
+    #     infoGrabber(summerLinks)
+    # elif userAns == 3:
+    #     infoGrabber(fallLinks)
+    # else:
+    #     print("You shouldn't see this")
         
 
+
+####################
+#       Main       #
+####################
 
 if __name__=="__main__":
     main()
