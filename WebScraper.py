@@ -48,6 +48,9 @@ def infoGrabber( linkList ):
             page = urlopen(links)
             soup = BeautifulSoup(page, 'html.parser')
             for info in soup.find_all('a'):
+                if info is None or info.pre is None:
+                    print("ERROR: Can't grab information.")
+                    # TODO: Fill this out.
                 if info.pre.text is not None:
                     print(info.pre.text)
 
