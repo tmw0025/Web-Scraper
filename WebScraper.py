@@ -22,8 +22,31 @@ import os
 # This function will take the class list from the department and semester
 # and then gives a class representation of the information. See class for it.
 # TODO: Flesh this out so that it gets the right information per class and returns a Course object.
-def parseInformation():
+def parseInformation(courseList):
     return
+
+# This parses an individual course line and returns the line if it is a course
+# otherwise it prints an empty line
+def parseCourseLine(line):
+
+    lenOfActualLine = 161 # TODO: Don't let this be hardcoded.
+    crnText = line[5:10] # The CRN should be within this position
+    try:
+        crn = int(crnText)  # Try to convert the text to a number, which would happen
+                            # if the line contained an actual course
+        return line # If it did, return the line
+    except ValueError: # If the line doesn't have a CRN
+        return "" # return basically nothing
+
+
+def getAllCourses(textList):
+    out = []
+    # For each line in the course listing table
+    for line in textList:
+        courseLine = parseCourseLine(line)
+        if len(courseLine) > 0: # If the course actually has something
+            out.append(courseLine) # Add the course to our output.
+    return out
 
 def linkGrabber( pageUrl , linkList ): # Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
@@ -49,6 +72,7 @@ def linkFormatter( linkList ):
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
 
+    textList = []
     # Go through each possible department in classes for the semester.
     for links in linkList:
         # If we found the college the user wants
@@ -65,6 +89,10 @@ def infoGrabber( linkList ):
                     continue
                 elif info.pre.text is not None: # If the link does have the classes
                     print(info.pre.text) # Print all the info
+                    for line in info.pre.text.split('\n'):
+                        textList.append(line)
+
+    return textList
 
 
 # Prints the possible semesters that the college offers
@@ -87,20 +115,21 @@ def getSemester():
         MenuPrint()
         userAns = input(">>> ")
 
+        # If user wants to quit,
         if userAns == 'q':
             print("Goodbye!")
-            sys.exit()
+            sys.exit() # Quit.
         try:
-            userAns = int(userAns)
-        except ValueError:
-            print("Not a Number, please enter a valid integer.")
+            userAns = int(userAns) # Try to convert the user input to a number
+        except ValueError: # If the string has characters other than numbers in it,
+            print("Not a Number, please enter a valid integer.") # Try to redo the whole process
             continue
         validChoice = [1,2,3] # we could do range(1,4) actually.
-        if userAns in validChoice:
-            validChoiceChosen = True
+        if userAns in validChoice: # If the user chose the valid info,
+            validChoiceChosen = True # we get out of here.
             break
-        if userAns not in validChoice:
-            print("Invalid Number, please enter a valid integer.")
+        elif userAns not in validChoice: # Otherwise
+            print("Invalid Number, please enter a valid integer.") # Try again.
             continue
     return userAns
 
@@ -128,15 +157,19 @@ def main():
     # Go through each possible link and try to find each semester within each.
     for links in mainLinks:
 
+        # Grab the linsk for the spring semester
         if links.find('sprg') != -1: # we could do >= 0
             linkGrabber(links, springLinks)
 
+        # Grab the links for the summer semester
         if links.find("sum") != -1:
             linkGrabber(links, summerLinks)
 
+        # Grab the links for the fall semester
         if links.find("fall") != -1:
             linkGrabber(links, fallLinks)
 
+    # Format links for each semester
     linkFormatter(springLinks)
     linkFormatter(summerLinks)
     linkFormatter(fallLinks)
@@ -146,7 +179,11 @@ def main():
 
     # Cleaner way of infoGrabber
     semesterLinkLists = [springLinks, summerLinks, fallLinks]
-    infoGrabber(semesterLinkLists[userAns - 1])
+    textList = infoGrabber(semesterLinkLists[userAns - 1])
+    print("============================")
+    courseData = getAllCourses(textList)
+    for course in courseData:
+        print(course)
 
 ####################
 #       Main       #
