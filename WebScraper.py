@@ -27,6 +27,7 @@ def parseInformation():
 
 def linkGrabber( pageUrl , linkList ): # Function that grabs links from specified url and puts them into a list
     page = urlopen(pageUrl)
+    # TODO: Is there a way that we can have a single BeautifulSoup object?
     soup = BeautifulSoup(page, 'html.parser')
 
     for links in soup.find_all('a'):
@@ -34,11 +35,12 @@ def linkGrabber( pageUrl , linkList ): # Function that grabs links from specifie
             linkList.append(links.get('href'))
     return;
 
+# Formats links so that they go to cgi-bin with the correct URL
 def linkFormatter( linkList ):
     for i,links in enumerate(linkList):
         url = "http://www.uah.edu" + links
         linkList[i] = url
-    
+
     return;
 
 # Grabs all the information from the link
@@ -46,19 +48,26 @@ def linkFormatter( linkList ):
 def infoGrabber( linkList ):
     college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
 
+    # Go through each possible department in classes for the semester.
     for links in linkList:
+        # If we found the college the user wants
         if links.find(college) != -1:
             print(links)
             page = urlopen(links)
+            # open the link and run it through BeautifulSoup
             soup = BeautifulSoup(page, 'html.parser')
+            # For all links on page
             for info in soup.find_all('a'):
+                # If the link doesn't have a pre tag (meaning it doesn't have the classes)
                 if info is None or info.pre is None:
-                    print("ERROR: Can't grab information.")
-                    # TODO: Fill this out.
-                elif info.pre.text is not None:
-                    print(info.pre.text)
+                    # Ignore it and move on.
+                    continue
+                elif info.pre.text is not None: # If the link does have the classes
+                    print(info.pre.text) # Print all the info
 
 
+# Prints the possible semesters that the college offers
+# TODO: Maybe make it so that if there is only one semester available for viewing, it prints that one.
 def MenuPrint():
     print("What semester would you like to view classes for? Hit q to exit")
     semesterList = ["Spring", "Summer", "Fall"]
@@ -107,19 +116,20 @@ def main():
 
     pageQuote = "https://www.uah.edu/cgi-bin/schedule.pl?"
 
-    mainLinks = []
-    springLinks = []
-    summerLinks = []
-    fallLinks = []
+    mainLinks   = []    # Links on the main page.
+    springLinks = []    # Links on the spring semester page
+    summerLinks = []    # Links on the summer semester page
+    fallLinks   = []    # Links on the fall semester page
 
+    # Grab the links on the main page
     linkGrabber( pageQuote , mainLinks)
 
     # Go through each possible link and try to find each semester within each.
     for links in mainLinks:
-        
+
         if links.find('sprg') != -1: # we could do >= 0
             linkGrabber(links, springLinks)
-            
+
         if links.find("sum") != -1:
             linkGrabber(links, summerLinks)
 
@@ -133,7 +143,7 @@ def main():
     # Cue for input from user
     userAns = getSemester()
 
-    #Cleaner way of infoGrabber
+    # Cleaner way of infoGrabber
     semesterLinkLists = [springLinks, summerLinks, fallLinks]
     infoGrabber(semesterLinkLists[userAns - 1])
 
