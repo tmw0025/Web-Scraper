@@ -64,9 +64,9 @@ def MenuPrint():
     idx = 1
     for semester in semesterList:
         print ('{}. {}'.format(idx,semester))
-        idx = idx + 1
+        idx += 1
 
-# function to obtain semester choice
+# Function to obtain semester choice
 # Includes error handling on user input
 def getSemester():
 
@@ -76,19 +76,19 @@ def getSemester():
         userAns = input(">>> ")
 
         if userAns == 'q':
-            print("\nGoodbye!\n")
+            print("Goodbye!")
             sys.exit()
         try:
             userAns = int(userAns)
         except ValueError:
-            print("Not a Number, please enter a valid integer.\n")
+            print("Not a Number, please enter a valid integer.")
             continue
-        validChoice = [1,2,3]
+        validChoice = [1,2,3] # we could do range(1,4) actually.
         if userAns in validChoice:
             validChoiceChosen = True
             break
         if userAns not in validChoice:
-            print("Invalid Number, please enter a valid integer. \n")
+            print("Invalid Number, please enter a valid integer.")
             continue
     return userAns
 
@@ -112,9 +112,10 @@ def main():
 
     linkGrabber( pageQuote , mainLinks)
 
+    # Go through each possible link and try to find each semester within each.
     for links in mainLinks:
         
-        if links.find('sprg') != -1:
+        if links.find('sprg') != -1: # we could do >= 0
             linkGrabber(links, springLinks)
             
         if links.find("sum") != -1:
@@ -131,17 +132,8 @@ def main():
     userAns = getSemester()
 
     #Cleaner way of infoGrabber
-    semesterlinklist = [springLinks,summerLinks,fallLinks]
-    infoGrabber(semesterlinklist[userAns-1])
-
-    # if userAns == 1:
-    #     infoGrabber(springLinks)
-    # elif userAns == 2:
-    #     infoGrabber(summerLinks)
-    # elif userAns == 3:
-    #     infoGrabber(fallLinks)
-    # else:
-    #     print("You shouldn't see this")
+    semesterLinkLists = [springLinks, summerLinks, fallLinks]
+    infoGrabber(semesterLinkLists[userAns - 1])
 
 ####################
 #       Main       #
