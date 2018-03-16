@@ -41,9 +41,6 @@ def infoGrabber( linkList ):
     # Append a space to the end of the chosen college abbreviation.
     # This should help with the MA vs MAE? Maybe?
     # Feel free to delete this line:
-     
-    # college = college + " "
-
 
     for links in linkList:
         if links.find(college) != -1:
@@ -53,9 +50,6 @@ def infoGrabber( linkList ):
             for info in soup.find_all('a'):
                 if info.pre.text is not None:
                     print(info.pre.text)
-                
-        
-    return;
 
 
 def MenuPrint():
@@ -72,7 +66,7 @@ def MenuPrint():
 def getSemester():
 
     validChoiceChosen = False
-    while validChoiceChosen==False:
+    while not validChoiceChosen:
         MenuPrint()
         userAns = input(">>> ")
 
@@ -128,10 +122,6 @@ def main():
     linkFormatter(summerLinks)
     linkFormatter(fallLinks)
 
-
-
-
-
     # Cue for input from user
     userAns = getSemester()
 
@@ -147,8 +137,6 @@ def main():
     #     infoGrabber(fallLinks)
     # else:
     #     print("You shouldn't see this")
-        
-
 
 ####################
 #       Main       #
