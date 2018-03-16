@@ -22,7 +22,7 @@ from Course import Course
 
 # This function will take the class list from the department and semester
 # and then gives a class representation of the information. See class for it.
-# TODO: Flesh this out as well.
+# TODO: Flesh this out so that it returns a Course object of each course listing.
 def parseInformation():
     return
 
@@ -41,6 +41,7 @@ def parseCourseLine(line):
         return "" # return basically nothing
 
 
+# Returns all courses from the course listing.
 def getAllCourses(textList):
     out = []
     # For each line in the course listing table
@@ -104,7 +105,7 @@ def MenuPrint():
 
     idx = 1
     for semester in semesterList:
-        print ('{}. {}'.format(idx,semester))
+        print ('{}. {}'.format(idx,semester)) # Print all semesters.
         idx += 1
 
 # Function to obtain semester choice
@@ -114,19 +115,19 @@ def getSemester():
     validChoiceChosen = False
     while not validChoiceChosen:
         MenuPrint()
-        userAns = input(">>> ")
+        userAns = input(">>> ") # Get user input
 
-        if userAns == 'q':
-            print("Goodbye!")
+        if userAns == 'q': # If user wants to quit
+            print("Goodbye!") # exit
             sys.exit()
         try:
-            userAns = int(userAns)
-        except ValueError:
-            print("Not a Number, please enter a valid integer.")
+            userAns = int(userAns) # try to convert user answer to integer
+        except ValueError: # if it's all text
+            print("Not a Number, please enter a valid integer.") # Try again
             continue
         validChoice = [1,2,3] # we could do range(1,4) actually.
-        if userAns in validChoice:
-            validChoiceChosen = True
+        if userAns in validChoice: # if user input is valid
+            validChoiceChosen = True # We get out.
             break
         if userAns not in validChoice:
             print("Invalid Number, please enter a valid integer.")
