@@ -31,7 +31,7 @@ from getAllCourses import getAllCourses
 # Function Definitions #
 ########################
 
-
+# Main function.
 def main():
 
     PrintHeader()
