@@ -10,7 +10,7 @@ def getSemester():
         MenuPrint()
         userAns = input(">>> ") # Get user input
 
-        if userAns == 'q': # If user wants to quit
+        if userAns.lower() == 'q': # If user wants to quit
             print("Goodbye!") # exit
             sys.exit()
         try:
