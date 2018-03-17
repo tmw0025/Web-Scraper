@@ -10,7 +10,7 @@ def infoGrabber( linkList ):
 
     #Check to make sure college entered is either 2 or 3 letters. 
     while validCollegeLength == False:
-        college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
+        college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):")).upper()
         if len(college) == 2 or len(college) == 3:
             validCollegeLength = True
         else:
