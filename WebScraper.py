@@ -20,6 +20,7 @@ from links import linkGrabber, linkFormatter
 from getSemester import getSemester
 from infoGrabber import infoGrabber
 from getAllCourses import getAllCourses
+from parseAllCourseInfo import parseAllCourseInfo
 
 
 # BeautifulSoup Tutorial
@@ -71,8 +72,9 @@ def main():
         semesterLinkLists = [springLinks, summerLinks, fallLinks]
         courseListings = infoGrabber(semesterLinkLists[userAns - 1])
         courses = getAllCourses(courseListings)
-        for course in courses:
-            print(course)
+        coursesClassList = parseAllCourseInfo(courses)
+        for course in coursesClassList:
+            course.printInfo()
 
         #Ask user if they want to try again
         if input("Press q to exit, press any other key to search again.").lower() == "q":
