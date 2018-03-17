@@ -19,7 +19,7 @@ class Course:
         self.start = ""
         self.end = ""
         self.building = ""
-        self.room = ""
+        self.room = 0
         self.instructor = ""
 
     def getAvailable(self):
@@ -28,6 +28,6 @@ class Course:
             out = 0
         return out
 
-##    def printInfo(self): This Function is used in infoGrabber for testing
-##        print("Section:", self.sectionType, " CRN:", self.CRN, " Course Number:", self.courseNumber, " Course ID:", self.courseId, " Title:", self.title, " Credit Hours:", self.creditHours, " Max Enrolled:", self.maxEnrolled, " Current Enolled:", self.currEnrolled, " Waitlist:", self.waitlist, " Days:", self.days, " Start:", self.start, " End:", self.end, " Building:", self.building, " Room:", self.room, " Instructor:", self.instructor)
-        
+    def printInfo(self): # This Function is used in infoGrabber for testing
+        print("Section:", self.sectionType, " CRN:", self.CRN, " Course Number:", self.courseNumber, " Course ID:", self.courseId, " Title:", self.title, " Credit Hours:", self.creditHours, " Max Enrolled:", self.maxEnrolled, " Current Enolled:", self.currEnrolled, " Waitlist:", self.waitlist, " Days:", self.days, " Start:", self.start, " End:", self.end, " Building:", self.building, " Room:", self.room, " Instructor:", self.instructor)
+      
