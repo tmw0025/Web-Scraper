@@ -73,6 +73,7 @@ def main():
         courseListings = infoGrabber(semesterLinkLists[userAns - 1])
         courses = getAllCourses(courseListings)
         coursesClassList = parseAllCourseInfo(courses)
+        print("\n{} results found!\n".format(len(coursesClassList)))
         for course in coursesClassList:
             course.printInfo()
 
