@@ -15,7 +15,6 @@ def infoGrabber( linkList ):
             validCollegeLength = True
         else:
             print("Not a college name, try again.")
-        college = college.upper()
     courseList = []
     textList = []
     # Go through each possible department in classes for the semester.
