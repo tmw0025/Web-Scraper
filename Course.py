@@ -28,7 +28,8 @@ class Course:
             out = 0
         return out
 
-    def printInfo(self): # This Function is used in infoGrabber for testing
+    # This Function is used in infoGrabber for testing
+    def printInfo(self):
         print("Section: ", self.sectionType, " CRN: ", self.CRN,
               " Course Number: ", self.courseNumber, " Course ID: ",
               self.courseId, " Title: ", self.title, " Credit Hours: ",
