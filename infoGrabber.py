@@ -33,6 +33,6 @@ def infoGrabber( linkList ):
                             if line.find(".0") != -1: # Find lines with course information
                                 courseList.append(parseInformation(line)) # Parse information into classes and store them in a list
                                 textList.append(line) # add line to textList to be printed
-##    for course in courseList:
-##        course.printInfo()        This is for testing purposes.
+#    for course in courseList:
+#        course.printInfo()       #  This is for testing purposes.
     return textList
