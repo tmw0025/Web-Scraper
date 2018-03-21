@@ -10,12 +10,11 @@ def infoGrabber( linkList ):
 
     #Check to make sure college entered is either 2 or 3 letters. 
     while validCollegeLength == False:
-        college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):"))
+        college = str(input("Enter 2-3 letter college code for class(i.e. MA - Math, CPE - Computer Eng):")).upper()
         if len(college) == 2 or len(college) == 3:
             validCollegeLength = True
         else:
             print("Not a college name, try again.")
-
     courseList = []
     textList = []
     # Go through each possible department in classes for the semester.
@@ -34,6 +33,6 @@ def infoGrabber( linkList ):
                             if line.find(".0") != -1: # Find lines with course information
                                 courseList.append(parseInformation(line)) # Parse information into classes and store them in a list
                                 textList.append(line) # add line to textList to be printed
-##    for course in courseList:
-##        course.printInfo()        This is for testing purposes.
+#    for course in courseList:
+#        course.printInfo()       #  This is for testing purposes.
     return textList

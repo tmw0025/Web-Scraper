@@ -1,7 +1,6 @@
 import os
 
 def PrintHeader():
-
     # Clear terminal and print header
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Welcome to the cgi-bin scraper. \n\n\n")

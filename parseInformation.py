@@ -2,8 +2,6 @@ from Course import Course
 
 # This function will take the class list from the department and semester
 # and then gives a class representation of the information. See class for it.
-# TODO: Flesh this out so that it returns a Course object of each course listing.
-
 def parseInformation(courseLine):
     course = Course()
     try:
