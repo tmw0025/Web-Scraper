@@ -38,4 +38,11 @@ class Course:
               self.waitlist, " Days: ", self.days, " Start: ", self.start,
               " End: ", self.end, " Building: ", self.building, " Room: ",
               self.room, " Instructor: ", self.instructor)
-      
+        return
+
+    def getTuple(self):
+        tup = (self.sectionType, self.CRN,
+               self.courseNumber, self.courseId, self.title, self.creditHours,
+               self.maxEnrolled, self.currEnrolled, self.days, self.waitlist,
+               self.start, self.end, self.building, self.room, self.instructor)
+        return tup
